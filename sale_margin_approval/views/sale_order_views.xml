@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Oranjewood
+     License OPL-1 (Odoo Proprietary License v1.0), see the LICENSE file. -->
+<odoo>
+    <record id="view_order_form_inherit_sale_margin_approval" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.sale_margin_approval</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <header position="inside">
+                <button
+                    name="action_request_manager_approval"
+                    type="object"
+                    string="Request Manager Approval"
+                    invisible="state not in ('draft', 'sent') or not requires_manager_approval"
+                />
+            </header>
+            <group name="sale_header" position="after">
+                <group name="margin_information" string="Margin Information">
+                    <group>
+                        <field
+                            name="margin_percentage"
+                            decoration-danger="requires_manager_approval"
+                        />
+                        <label
+                            for="requires_manager_approval"
+                            invisible="requires_manager_approval"
+                        />
+                        <label
+                            for="requires_manager_approval"
+                            class="text-danger fw-bold"
+                            invisible="not requires_manager_approval"
+                        />
+                        <field name="requires_manager_approval" nolabel="1" />
+                    </group>
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>

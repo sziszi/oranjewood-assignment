@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Oranjewood
+     License OPL-1 (Odoo Proprietary License v1.0), see the LICENSE file. -->
+<odoo>
+    <template
+        id="sale_order_portal_template_inherit_sale_margin_approval"
+        inherit_id="sale.sale_order_portal_template"
+    >
+        <xpath expr="//a[@id='print_invoice_report']/.." position="after">
+            <div
+                class="o_sale_margin_info flex-grow-1"
+                t-att-data-order-id="sale_order.id"
+                t-att-data-token="sale_order.access_token"
+            >
+                <button
+                    type="button"
+                    class="btn btn-secondary d-block w-100"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#o_sale_margin_details"
+                    aria-expanded="false"
+                    aria-controls="o_sale_margin_details"
+                >
+                    <i class="fa fa-percent" /> Show Margin Info
+                </button>
+                <div id="o_sale_margin_details" class="collapse">
+                    <div class="border rounded p-2 mt-2">
+                        <div class="o_sale_margin_loading text-muted">Loading...</div>
+                        <div class="o_sale_margin_values d-none">
+                            <div>
+                                Margin Percentage
+                                <strong class="o_sale_margin_percentage" />
+                            </div>
+                            <div>
+                                Manager Approval Required
+                                <strong class="o_sale_margin_required" />
+                            </div>
+                        </div>
+                        <div class="o_sale_margin_error d-none text-danger" role="alert">
+                            Could not load the margin information. Close the panel and open it again to retry.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
